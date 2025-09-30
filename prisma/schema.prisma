@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+model User {
+  user_id      String  @id @unique
+  date_of_birth String?
+  height_cm    Int?
+  weight_kg    Float?
+  bmi          Float?
+  sex          String?
+  time_zone    String?
+  offset       String?
+}
+
+model HealthData {
+  id          Int      @id @default(autoincrement())
+  user_id     String
+  data_type   String
+  date        String
+  data        Json
+  fetched_at  DateTime @default(now())
+}
